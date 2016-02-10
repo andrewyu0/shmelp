@@ -60,8 +60,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thai Seafood" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yC-q7-Jly">
-                                                    <rect key="frame" x="81" y="65" width="80" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thai Seafood" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yC-q7-Jly">
+                                                    <rect key="frame" x="81" y="65" width="231" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.52266808712121215" green="0.52266808712121215" blue="0.52266808712121215" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -94,6 +94,7 @@
                                                 <constraint firstItem="mRT-iT-huM" firstAttribute="top" secondItem="FG1-Wf-4lX" secondAttribute="bottom" constant="2" id="i27-2t-lfF"/>
                                                 <constraint firstAttribute="trailing" secondItem="nEh-Tu-9JT" secondAttribute="trailing" constant="9" id="jh1-Rm-bZZ"/>
                                                 <constraint firstItem="SpO-Lo-Euz" firstAttribute="centerY" secondItem="FG1-Wf-4lX" secondAttribute="centerY" id="l9A-5t-3dw"/>
+                                                <constraint firstAttribute="trailing" secondItem="4yC-q7-Jly" secondAttribute="trailing" constant="8" id="pqd-ua-FtU"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Zdy-Q6-YPn" secondAttribute="bottom" constant="12" id="qFX-ca-MMD"/>
                                                 <constraint firstItem="4yC-q7-Jly" firstAttribute="leading" secondItem="mRT-iT-huM" secondAttribute="leading" id="qHI-es-IPC"/>
                                                 <constraint firstItem="gBx-ro-RIu" firstAttribute="top" secondItem="Kl8-LJ-372" secondAttribute="top" constant="10" id="skf-5O-q6h"/>
