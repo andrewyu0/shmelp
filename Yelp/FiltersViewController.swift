@@ -8,10 +8,16 @@
 
 import UIKit
 
+@objc protocol FiltersViewControllerDelegate {
+    optional func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String:AnyObject])
+}
+
 class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwitchCellDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-
+    
+    weak var delegate: FiltersViewControllerDelegate?
+    
     var categories: [[String:String]]!
     var switchStates = [Int: Bool]()
     
@@ -34,6 +40,22 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     @IBAction func onSearchButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
+        //Filters passed back could be anything
+
+        var filters = [String: AnyObject]()
+        
+        // Set up filters to be passed to 'categories' used in BusinessVC
+        var selectedCategories = [String]()
+        for (row, isSelected) in switchStates {
+            if isSelected {
+                selectedCategories.append(categories[row]["code"]!)
+            }
+        }
+        if selectedCategories.count  > 0 {
+            filters["categories"] = selectedCategories
+        }
+        
+        delegate?.filtersViewController?(self, didUpdateFilters: filters)
     }
     
     // MARK: - set up TableView

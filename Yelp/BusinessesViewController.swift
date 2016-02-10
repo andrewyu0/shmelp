@@ -9,7 +9,7 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -17,7 +17,17 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // set navbar styling
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.translucent  = false
+            navigationBar.barTintColor = UIColor.redColor()
+            navigationBar.tintColor    = UIColor.whiteColor()
+            navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName : UIColor.whiteColor()
+            ]
+        }
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -66,14 +76,26 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         // Dispose of any resources that can be recreated.
     }
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let navigationController = segue.destinationViewController as! UINavigationController
+        let filtersViewController = navigationController.topViewController as! FiltersViewController
+        
+        filtersViewController.delegate  = self
     }
-    */
+    
+    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {
+         // Retrigger the data call 
+        
+        var categories = filters["categories"] as? [String]
+        Business.searchWithTerm("Restaurants", sort: nil, categories: categories, deals: nil) {
+            (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses = businesses
+            self.tableView.reloadData()
+        }
+    }
 
 }
