@@ -22,12 +22,12 @@ class BusinessCell: UITableViewCell {
     var business : Business! {
         didSet {
             businessNameLabel.text = business.name
-            thumbImageView.setImageWithURL(business.imageURL!)
-            categoriesLabel.text = business.categories
-            addressLabel.text = business.address
+            categoriesLabel.text   = business.categories
+            addressLabel.text      = business.address
             reviewsCountLabel.text = "\(business.reviewCount!) Reviews"
+            distanceLabel.text     = business.distance
+            thumbImageView.setImageWithURL(business.imageURL!)
             ratingsImageView.setImageWithURL(business.ratingImageURL!)
-            distanceLabel.text = business.distance
         }
     }
     
@@ -36,6 +36,13 @@ class BusinessCell: UITableViewCell {
         // Initialization code
         thumbImageView.layer.cornerRadius = 5
         thumbImageView.clipsToBounds = true
+        
+        businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
