@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--Shmelp-->
+        <!--Yelp-->
         <scene sceneID="5L9-Uz-lNK">
             <objects>
                 <viewController id="2xI-yr-O5N" customClass="BusinessesViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
@@ -123,7 +123,7 @@
                             <constraint firstItem="RhP-HG-gAF" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="dNu-B4-nrF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Shmelp" id="xIj-ON-j1K">
+                    <navigationItem key="navigationItem" title="Yelp" id="xIj-ON-j1K">
                         <barButtonItem key="leftBarButtonItem" title="Filters" id="8Nf-MX-Nbu">
                             <connections>
                                 <segue destination="g7d-p5-k2W" kind="modal" id="czG-gS-Cvi"/>
@@ -141,7 +141,7 @@
         <!--Filters-->
         <scene sceneID="Ooe-pg-YTf">
             <objects>
-                <viewController id="dYd-GX-SLX" sceneMemberID="viewController">
+                <viewController id="dYd-GX-SLX" customClass="FiltersViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Cvi-29-MjN"/>
                         <viewControllerLayoutGuide type="bottom" id="RDb-sa-XNi"/>
@@ -154,7 +154,7 @@
                                 <rect key="frame" x="0.0" y="1" width="320" height="567"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="75" id="qmR-xS-6gn" customClass="SwitchCell" customModule="Yelp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" rowHeight="75" id="qmR-xS-6gn" customClass="SwitchCell" customModule="Yelp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qmR-xS-6gn" id="BnK-Ee-iRv">
@@ -195,9 +195,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Filters" id="0h4-ho-ZKB">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Iw9-6x-9pY"/>
-                        <barButtonItem key="rightBarButtonItem" title="Search" id="aEy-g5-FK9"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Iw9-6x-9pY">
+                            <connections>
+                                <action selector="onCancelButton:" destination="dYd-GX-SLX" id="jhV-0T-i2p"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="aEy-g5-FK9">
+                            <connections>
+                                <action selector="onSearchButton:" destination="dYd-GX-SLX" id="NX7-cj-8Sj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="ued-0d-Lpo" id="X5r-0t-aDw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7vi-kn-Vpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
