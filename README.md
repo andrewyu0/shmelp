@@ -4,58 +4,70 @@
 
 ![](Yelp/Images.xcassets/AppIcon.appiconset/yelp60@2x.png)
 
-Time spent: **X** hours spent in total
+Time spent: **15** hours spent in total
+
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+### Portrait View
+![](yelp_portrait.gif)
+
+
+
+### Landscape View
+![](yelp_landscape.gif)
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## User Stories
 
 The following **required** functionality is completed:
 
 - [x] Search results page
-- [x] Table rows should be dynamic height according to the content height.
-- [x] Custom cells should have the proper Auto Layout constraints.
-- [x] Search bar should be in the navigation bar (doesn't have to expand to show location like the real Yelp app does).
+    - [x] Table rows should be dynamic height according to the content height.
+    - [x] Custom cells should have the proper Auto Layout constraints.
+    - [x] Search bar should be in the navigation bar (doesn't have to expand to show location like the real Yelp app does).
 - [x] Filter page. Unfortunately, not all the filters are supported in the Yelp API.
-- [x] The filters you should actually have are: category, sort (best match, distance, highest rated), distance, deals (on/off).
-- [x] The filters table should be organized into sections as in the mock.
-- [x] You can use the default UISwitch for on/off states.
-- [x] Clicking on the "Search" button should dismiss the filters page and trigger the search w/ the new filter settings.
-- [x] Display some of the available Yelp categories (choose any 3-4 that you want).
+    - [x] The filters you should actually have are: category, sort (best match, distance, highest rated), distance, deals (on/off).
+    - [x] The filters table should be organized into sections as in the mock.
+    - [x] You can use the default UISwitch for on/off states.
+    - [x] Clicking on the "Search" button should dismiss the filters page and trigger the search w/ the new filter settings.
+    - [x] Display some of the available Yelp categories (choose any 3-4 that you want).
 
 The following **optional** features are implemented:
-
+Several were started but none fully completed :( Will revisit
 - [ ] Search results page
-- [ ] Infinite scroll for restaurant results.
-- [ ] Implement map view of restaurant results.
+    - [ ] Infinite scroll for restaurant results.
+    - [ ] Implement map view of restaurant results.
 - [ ] Filter page
-- [ ] Implement a custom switch instead of the default UISwitch.
-- [ ] Distance filter should expand as in the real Yelp app
-- [ ] Categories should show a subset of the full list with a "See All" row to expand. Category list is [here](http://www.yelp.com/developers/documentation/category_list).
-- [ ] Implement the restaurant detail page.
+    - [ ] Implement a custom switch instead of the default UISwitch.
+    - [ ] Distance filter should expand as in the real Yelp app
+    - [ ] Categories should show a subset of the full list with a "See All" row to expand. Category list is [here](http://www.yelp.com/developers/documentation/category_list).
+    - [ ] Implement the restaurant detail page.
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] Pull down to refresh
+- [x] External spinner library
+- [x] Used image assets for more cohesive aesthetic
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Best practices and patterns for implementing different filter combinations
+2. Geolocation and map functionality, building out a details page
 
-## Video Walkthrough
-
-Here's a walkthrough of implemented user stories:
-
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Describe any challenges encountered while building the app
+
+* Played around with various ways to implement the single select menus (Sorts, Distance), found it challenging to stick with a 'best' approach'
+* Didn't get a chance to delve as deeply as I wanted to on the business logic in the basic Yelp integration, will revisit
 
 ## License
 
-Copyright [yyyy] [name of copyright owner]
+Copyright [2016] [Andrew Yu]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
