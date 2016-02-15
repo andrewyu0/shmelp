@@ -126,6 +126,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Yelp" id="xIj-ON-j1K">
                         <barButtonItem key="leftBarButtonItem" title="Filters" id="8Nf-MX-Nbu">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="g7d-p5-k2W" kind="modal" id="czG-gS-Cvi"/>
                             </connections>
@@ -162,8 +163,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkH-wT-8YF">
-                                                    <rect key="frame" x="19" y="27" width="42" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Korean" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkH-wT-8YF">
+                                                    <rect key="frame" x="19" y="27.5" width="53.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -184,6 +185,83 @@
                                             <outlet property="switchLabel" destination="SkH-wT-8YF" id="cvY-R6-6qf"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DealCell" id="49A-8M-KVp" customClass="DealCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="167" width="320" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="49A-8M-KVp" id="4gu-3r-Iws">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offering a deal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tej-EH-sa3">
+                                                    <rect key="frame" x="15" y="27" width="113" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zOZ-xB-fzg">
+                                                    <rect key="frame" x="258" y="22" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="dealToggled:" destination="49A-8M-KVp" eventType="valueChanged" id="qfH-Vi-VkZ"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="zOZ-xB-fzg" firstAttribute="top" secondItem="4gu-3r-Iws" secondAttribute="top" constant="22" id="DBd-sO-rdQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="zOZ-xB-fzg" secondAttribute="trailing" constant="13" id="Gq2-SV-s7Y"/>
+                                                <constraint firstItem="tej-EH-sa3" firstAttribute="top" secondItem="4gu-3r-Iws" secondAttribute="top" constant="27" id="UVE-Qc-gZU"/>
+                                                <constraint firstItem="tej-EH-sa3" firstAttribute="leading" secondItem="4gu-3r-Iws" secondAttribute="leading" constant="15" id="rKb-0m-lBG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dealSwitch" destination="zOZ-xB-fzg" id="8JC-Zl-TjD"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SortCell" id="Tth-MN-Mig" customClass="SortCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="242" width="320" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tth-MN-Mig" id="vov-3k-Xqv">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort cell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnt-VO-GjD">
+                                                    <rect key="frame" x="22" y="26" width="63.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="fnt-VO-GjD" firstAttribute="top" secondItem="vov-3k-Xqv" secondAttribute="top" constant="26" id="E2e-ou-taU"/>
+                                                <constraint firstItem="fnt-VO-GjD" firstAttribute="leading" secondItem="vov-3k-Xqv" secondAttribute="leading" constant="22" id="vBN-qS-7Se"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="sortLabel" destination="fnt-VO-GjD" id="iWF-so-fUF"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DistanceCell" id="P5G-ou-b5I" customClass="DistanceCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="317" width="320" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P5G-ou-b5I" id="XCk-Pk-GRf">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpX-Es-x5q" customClass="Distance">
+                                                    <rect key="frame" x="18.5" y="27" width="67" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="xpX-Es-x5q" firstAttribute="leading" secondItem="XCk-Pk-GRf" secondAttribute="leading" constant="18.5" id="3p4-kv-Oih"/>
+                                                <constraint firstItem="xpX-Es-x5q" firstAttribute="top" secondItem="XCk-Pk-GRf" secondAttribute="top" constant="27" id="Cti-ZR-d3r"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="distanceLabel" destination="xpX-Es-x5q" id="C2S-9O-N95"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -197,11 +275,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Filters" id="0h4-ho-ZKB">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="Iw9-6x-9pY">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onCancelButton:" destination="dYd-GX-SLX" id="jhV-0T-i2p"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Search" id="aEy-g5-FK9">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onSearchButton:" destination="dYd-GX-SLX" id="NX7-cj-8Sj"/>
                             </connections>
@@ -213,7 +293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7vi-kn-Vpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2145" y="333"/>
+            <point key="canvasLocation" x="1817" y="1123"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="F3A-Uf-78A">
@@ -223,6 +303,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VNA-SK-8XR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -241,6 +322,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="h1K-gv-WLa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -249,7 +331,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8aS-Cn-n0K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1764" y="333"/>
+            <point key="canvasLocation" x="1327" y="1123"/>
         </scene>
     </scenes>
 </document>

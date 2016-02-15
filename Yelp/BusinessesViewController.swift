@@ -8,20 +8,32 @@
 //
 
 import UIKit
+import SVProgressHUD
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, FiltersViewControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var searchBar      : UISearchBar!
+    var businesses     : [Business]!
+    var filteredData   : [String]!
+    var currentFilters : NSDictionary?
 
-    var businesses: [Business]!
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Initialize a UIRefreshControl
+        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
         
         // Add search bar to navigation
-        let searchBar = UISearchBar()
+        searchBar = UISearchBar()
         searchBar.sizeToFit()
+        searchBar!.text = query
         navigationItem.titleView = searchBar
+        searchBar.delegate = self
 
         // set navbar styling
         if let navigationBar = navigationController?.navigationBar {
@@ -38,74 +50,134 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
-        Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
-            self.businesses = businesses
-            self.tableView.reloadData()
-            for business in businesses {
-                print(business.name!)
-                print(business.address!)
-            }
-        })
+        SVProgressHUD.show()
+        fetchYelpData(query, filters: currentFilters)
+    }
 
-/* Example of Yelp search with more search options specified
-        Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
-            self.businesses = businesses
-            
-            for business in businesses {
-                print(business.name!)
-                print(business.address!)
+    var query: String {
+        get {
+            if let bar = searchBar {
+                return bar.text! == "" ? "Restaurants" : bar.text!
+            } else {
+                return "Restaurants"
             }
         }
-*/
     }
     
+    func refreshControlAction(refreshControl: UIRefreshControl){
+        Business.searchWithTerm("Restaurants", completion: { (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses = businesses
+            SVProgressHUD.dismiss()
+            self.tableView.reloadData()
+        })
+        self.refreshControl.endRefreshing()
+        
+    }
     
+    func fetchYelpData(query:String, filters: NSDictionary?){
+        
+        SVProgressHUD.show()
+        
+        if (filters != nil) {
+            let categories = filters!["categories"] as? [String]
+            let dealsBool = filters!["deals_filter"] as! Bool
+            let radius    = filters!["radius_filter"] as! Double
+            var sortOrder = YelpSortMode.BestMatched
+            if let sort = filters!["sort"] as? Int {
+                sortOrder =  YelpSortMode(rawValue: sort)!
+            }
+            
+            
+            Business.searchWithTerm(query, sort: sortOrder, categories: categories, deals: dealsBool, radius: radius){
+                (businesses: [Business]!, error: NSError!) -> Void in
+                self.businesses = businesses
+                self.tableView.reloadData()
+                SVProgressHUD.dismiss()
+            }
+        }
+        else {
+            Business.searchWithTerm(query, completion: { (businesses: [Business]!, error: NSError!) -> Void in
+                self.businesses = businesses
+                SVProgressHUD.dismiss()
+                self.tableView.reloadData()
+            })
+        }
+    }
     
     // MARK: - Table View Delegate and DataSource methods
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if businesses != nil {
-            return businesses!.count
-        }
-        else {
-            return 0
-        }
+        return businesses?.count ?? 0
     }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell", forIndexPath: indexPath) as! BusinessCell
-     
         cell.business = businesses[indexPath.row]
-        
         return cell
     }
     
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        SVProgressHUD.dismiss()
+        searchBar.resignFirstResponder()
+    }
     
+    // MARK: - Search Bar Delegate methods
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        SVProgressHUD.show()
+        fetchYelpData(query, filters: currentFilters)
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        fetchYelpData(query, filters: currentFilters)
+        SVProgressHUD.dismiss()
+        
+    }
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
         let navigationController = segue.destinationViewController as! UINavigationController
         let filtersViewController = navigationController.topViewController as! FiltersViewController
-        
         filtersViewController.delegate  = self
     }
     
-    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {
-         // Retrigger the data call 
+    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: NSDictionary) {
+         // Retrigger the data call
+        SVProgressHUD.show()
         
-        var categories = filters["categories"] as? [String]
-        Business.searchWithTerm("Restaurants", sort: nil, categories: categories, deals: nil) {
+        // Set up vals to use in Business.searchWithTerm
+        let categories = filters["categories"] as? [String]
+        let dealsBool  = filters["deals_filter"] as! Bool
+        let radius     = filters["radius_filter"] as! Double
+        var sortOrder  = YelpSortMode.BestMatched
+        if let sort = filters["sort"] as? Int {
+            sortOrder =  YelpSortMode(rawValue: sort)!
+        }
+        
+        Business.searchWithTerm(query, sort: sortOrder, categories: categories, deals: dealsBool, radius: radius){
             (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
             self.tableView.reloadData()
+            self.currentFilters = filters
+            SVProgressHUD.dismiss()
         }
     }
+
 
 }
